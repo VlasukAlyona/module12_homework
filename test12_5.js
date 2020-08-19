@@ -1,35 +1,65 @@
 class ElectroDevice {
- constructor(name, pow, mod) {
- this.name = name;
- this.pow = pow;
- this.mod = mod;
- }
- GetPower(){
-  console.log(`${this.name} потребляет ${this.pow} Ватт энергии`);
-}
- GetMode(){
-  if (this.mod == 1) {
-      console.log(`${this.name} включён в розетку`);
- } else {
-      console.log(`${this.name} выключен из розетки`);
- }
-}
-}
-const fen = new ElectroDevice('Фен', 1500, 1)
-fen.city = 'Китай';
-fen.Age = function(age){
-  console.log(`Год производительности фена ${age}лет, город ${fen.city}`);
+	constructor(name, pow, mod) {
+		this.name = name;
+		this.pow = pow;
+		this.mod = mod;
+	}
+	plugIn() {
+	  this.mod = 1;
+	}
+	unplug() {
+	  this.mod = 0;
+	}
+	getPower(){
+		console.log(`${this.name} потребляет ${this.pow} Ватт энергии`);
+	}
+	getMode(){
+		if (this.mod == 1) {
+		  console.log(`${this.name} включён в розетку`);
+		} else {
+		  console.log(`${this.name} выключен из розетки`);
+		}
+	}
 }
 
-fen.Age(5)
-fen.GetPower()
-fen.GetMode()
+// Класс Fen, наследует от ElectroDevice
+class Fen extends ElectroDevice {
+	constructor(name, pow, mod, city, age) {
+		super(name, pow, mod);
+		this.city = city;
+		this.age = age;
+	}
 
-const computer = new ElectroDevice('Компьютер', 220, 0);
-computer.brand = 'MSI';
-computer.Color = function(color){
-  console.log(`Компьютер марки ${computer.brand} ${color} цвета`);
+  getAge() {
+    console.log(`Год производительности фена ${this.age} лет, город ${this.city}`);
+  }
 }
-computer.GetPower()
-computer.GetMode()
-computer.Color('белого')
+
+// Класс Computer, наследует от ElectroDevice
+class Computer extends ElectroDevice {
+	constructor(name, pow, mod, brand, color) {
+		super(name, pow, mod);
+		this.brand = brand;
+		this.color = color;
+	}
+
+  getColor() {
+    console.log(`Компьютер марки ${this.brand} ${this.color} цвета`);
+  }
+}
+
+// Создаем экземпляры классов Fen и Computer
+const fen = new Fen('Фен', 1500, 1, 'Китай', 5);
+const computer = new Computer('Компьютер', 220, 0, 'MSI', 'белого');
+
+fen.getMode();
+fen.unplug();
+fen.getMode();
+
+fen.getPower();
+computer.getPower();
+
+fen.getAge();
+computer.getColor();
+
+// Здесь ошибки аналогичные предыдущему заданию. Исправила в коде выше.
